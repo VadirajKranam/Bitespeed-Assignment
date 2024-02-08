@@ -1,8 +1,10 @@
 const express = require('express')
-
+require('dotenv').config()
 const app = express()
 app.use(express.json())
-const {getContactByEmail,getContactByPhoneNumber,createContact,createSecondaryContact,updateContactToSecondary,findSecondaryContacts}=require('./database')
+const PORT=process.env.PORT||3000
+const {getContactByEmail,getContactByPhoneNumber,createContact,createSecondaryContact,updateContactToSecondary,findSecondaryContacts}=require('./utils')
+const { connection } = require('./database')
 app.post("/identify",async (req, res) => {
     const { email, phoneNumber } = req.body
     const contactWithEmail=await getContactByEmail(email)
@@ -61,6 +63,6 @@ app.post("/identify",async (req, res) => {
     res.send("ok")
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
 console.log("Listening to port 3000")
 })
