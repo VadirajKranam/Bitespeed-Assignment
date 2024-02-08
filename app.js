@@ -40,7 +40,6 @@ app.post("/identify",async (req, res) => {
         contactWithPhoneNumber["Id"]
       );
     }
-    console.log(contactWithEmail)
     const secondaryContact = await findSecondaryContacts(contactWithEmail["Id"])
     JSON.stringify(secondaryContact)
     if (secondaryContact != null) {
